@@ -12,7 +12,7 @@ Team Members
 - Ines Ingabire
  
 Architecture Diagram: 
-[Link — added once Person 2 finishes it]
+https://miro.com/app/board/uXjVHpCTTTc=/?share_link_id=949621607941 
 
 Scrum Board: 
 https://github.com/users/gineza1-hash/projects/1/views/1 
