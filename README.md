@@ -1,6 +1,6 @@
 TEAM GROK   
 
-Project Description
+Project Description: 
 This project processes MoMo SMS transaction data (in XML format), cleans and
 categorizes it, stores it in a relational database, and presents it through
 a frontend dashboard for analysis.
@@ -8,7 +8,7 @@ a frontend dashboard for analysis.
 Team Members
 - Elsie Glenna Ineza
 - Hillary Kayinababo
-- Sonia Gendaneza
+- Sonia Keza Gendaneza
 - Ines Ingabire
  
 Architecture Diagram: 
