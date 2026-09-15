@@ -74,7 +74,7 @@ The examples include:
 - System Logs
 - A complete transaction object containing related user and category information
 
-JSON Examples: examples/json_schemas.json
+JSON Examples: 
 
 The JSON documentation also explains how the SQL tables and their relationships map to the JSON structures.
 
@@ -92,9 +92,9 @@ The database includes rules designed to improve data accuracy and integrity, inc
 
 Screenshots demonstrating these rules are included in the Database Design Document.
 
-5. Team Collaboration
+5. Our Overall Team Work:
 
-The project continues the collaborative practices established in Week 1.
+Our project continues the collaborative practices established in Week 1.
 
 The GitHub repository contains the ERD, SQL script, JSON examples, and project documentation. Team contributions are demonstrated through GitHub commits.
 
