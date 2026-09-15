@@ -1,0 +1,44 @@
+{
+  "transaction_id": 1,
+  "financial_transaction_id": "FTX10023456",
+  "amount": 5000.00,
+  "fee": 100.00,
+  "currency": "RWF",
+  "status": "Completed",
+  "transaction_date": "2026-09-01T09:15:00",
+  "raw_body": "You have sent 5000 RWF to Eric Niyonzima. Fee 100 RWF. TxId: FTX10023456",
+  "category": {
+    "category_id": 2,
+    "category_name": "P2P Transfer",
+    "category_code": "P2P",
+    "description": "Person-to-person money transfer"
+  },
+  "participants": [
+    {
+      "role": "sender",
+      "user": {
+        "user_id": 1,
+        "full_name": "Aline Uwase",
+        "phone_number": "250788123456",
+        "account_type": "Personal"
+      }
+    },
+    {
+      "role": "receiver",
+      "user": {
+        "user_id": 2,
+        "full_name": "Eric Niyonzima",
+        "phone_number": "250788234567",
+        "account_type": "Personal"
+      }
+    }
+  ],
+  "logs": [
+    {
+      "log_id": 1,
+      "process_stage": "Completed",
+      "log_message": "Transaction parsed, categorized, and loaded successfully",
+      "log_status": "Success"
+    }
+  ]
+}

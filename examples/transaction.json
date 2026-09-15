@@ -1,0 +1,11 @@
+{
+  "transaction_id": 1,
+  "financial_transaction_id": "FTX10023456",
+  "category_id": 2,
+  "fee": 100.00,
+  "amount": 5000.00,
+  "status": "Completed",
+  "currency": "RWF",
+  "transaction_date": "2026-09-01T09:15:00",
+  "raw_body": "You have sent 5000 RWF to Eric Niyonzima. Fee 100 RWF. TxId: FTX10023456"
+}
