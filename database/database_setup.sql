@@ -110,7 +110,7 @@ INSERT INTO Transaction_participants (Userid, Transactionid, role) VALUES
 (4, 4, 'sender'),
 (5, 4, 'receiver'),
 (1, 5, 'sender'),
-(5, 5, 'receiver')
+(5, 5, 'receiver');
 
 -- ============================
 -- UPDATE TEST

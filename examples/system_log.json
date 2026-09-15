@@ -1,0 +1,7 @@
+{
+  "log_id": 1,
+  "transaction_id": 1,
+  "process_stage": "Completed",
+  "log_message": "Transaction parsed, categorized, and loaded successfully",
+  "log_status": "Success"
+}
