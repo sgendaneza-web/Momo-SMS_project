@@ -100,6 +100,8 @@ The GitHub repository contains the ERD, SQL script, JSON examples, and project d
 
 The Scrum board has also been updated with completed Week 1 tasks and the new Week 2 sprint tasks.
 
+Submissions Links
+
 Team Participation Sheet
 Link: https://docs.google.com/spreadsheets/d/1gl_vX1CCEraUrOGmpLTPhHD2sr1nROxf8aGF37MW0eE/edit?gid=0#gid=0)
 
