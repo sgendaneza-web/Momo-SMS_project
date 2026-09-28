@@ -1,72 +1,81 @@
-TEAM GROK   
+# TEAM GROK — MoMo SMS Data Processing System
 
-Project Description: 
-Building on our Week 1 team setup, this project focuses on designing and implementing the database foundation for a MoMo SMS data processing system.
+A system that stores, processes, and analyzes mobile money (MoMo) transactions from SMS data, built with a focus on data integrity, efficient querying, and future scalability.
 
-The system is designed to store, process, and analyze mobile money transactions while maintaining data integrity, efficient querying, and future scalability. The project covers ERD design, MySQL implementation, JSON data modeling, testing, and team collaboration.
+## Team
 
-Team Members
-- Elsie Glenna Ineza
-- Hillary Kayinababo
-- Sonia Keza Gendaneza
-- Ines Ingabire
+| Name |
+|------|
+| Elsie Glenna Ineza |
+| Hillary Kayinababo |
+| Sonia Keza Gendaneza |
+| Ines Ingabire |
 
-Our project aims to:
+## About the Project
 
-- Analyze the MoMo XML structure and identify key entities, attributes, and relationships.
-- Design a comprehensive Entity Relationship Diagram (ERD).
-- Implement the database using MySQL and SQL.
-- Apply primary keys, foreign keys, constraints, indexes, and appropriate data types.
-- Insert test data and perform CRUD operations.
-- Represent relational data using JSON.
-- Document the database design and demonstrate team collaboration through GitHub and Scrum.
-  
-1. Entity Relationship Diagram
+MoMo SMS records arrive as XML. Our system parses that data, cleans and categorizes it, stores it in a relational database, and makes it available to clients through a REST API and a dashboard.
 
-The ERD was designed based on the MoMo XML structure and business requirements.
+**Project goals**
 
-The core entities are:
+- Analyze the MoMo XML structure and identify key entities, attributes, and relationships
+- Design a comprehensive Entity Relationship Diagram (ERD)
+- Implement the database in MySQL, with keys, constraints, indexes, and suitable data types
+- Insert test data and perform CRUD operations
+- Represent relational data as JSON
+- Expose the data through a secure, documented REST API
+- Compare search approaches (DSA) to show efficiency trade-offs
+- Document the work and show team collaboration through GitHub and Scrum
 
-Transactions
-Users/Customers
-Transaction_Categories
-System_Logs
+## Project Progress
 
-The ERD includes primary keys, foreign keys, appropriate attributes and data types, relationship cardinalities, and a junction table to resolve a many-to-many relationship.
+| Stage | What we did | Status |
+|-------|-------------|--------|
+| **Week 1** | Formed the team, set up the GitHub repo and Scrum board, drew the architecture diagram, and planned the ETL and dashboard structure | Done |
+| **Week 2** | Analyzed the MoMo XML, designed the ERD, built the MySQL database (constraints, indexes, test data, CRUD), and modeled the data as JSON | Done |
+| **Week 3** | Built the REST API with Basic Auth, wrote the API docs, compared linear search vs dictionary lookup, and tested with curl/Postman | Done |
 
-ERD: docs/erd_diagram.png
+Each section below is tagged with the week it was built.
 
-Design Rationale
+---
 
-The database separates users, transactions, categories, and system logs to reduce duplication and maintain data integrity. Users can participate in multiple transactions, while transactions are classified through the Transaction_Categories table. System logs are stored separately to track processing activities and errors.
+## 1. Database Design *(Week 2)*
 
-Foreign keys establish relationships between entities, while constraints help prevent invalid data. A junction table resolves the many-to-many relationship identified during the analysis. Indexes and appropriate data types are included to improve query performance and support future scalability.
+### Entity Relationship Diagram
 
-2. SQL Database Implementation
+The ERD is based on the MoMo XML structure and business requirements.
 
-The ERD was transformed into a working MySQL database.
+**Core entities:** Transactions, Users/Customers, Transaction_Categories, System_Logs
 
-The SQL implementation includes:
+The ERD includes primary keys, foreign keys, attributes with data types, relationship cardinalities, and a junction table that resolves a many-to-many relationship.
 
-- DDL statements for all tables
+ERD: `docs/ERD_Diagram.png`
+
+### Design Rationale
+
+Users, transactions, categories, and system logs are kept in separate tables to reduce duplication and protect data integrity. Users can take part in many transactions, and transactions are classified through the Transaction_Categories table. System logs are stored separately to track processing activity and errors. Foreign keys define the relationships, constraints prevent invalid data, and indexes plus well-chosen data types support query performance and scalability.
+
+### SQL Implementation
+
+The ERD was turned into a working MySQL database that includes:
+
+- DDL for all tables
 - Primary and foreign key constraints
-- CHECK constraints where appropriate
+- CHECK, NOT NULL, and UNIQUE constraints
 - Appropriate MySQL data types
-- Performance indexes
-- Column comments
-- Sample DML statements
-- Test data
-- CRUD operations
+- Performance indexes and column comments
+- Sample DML, test data, and CRUD operations
 
-SQL Script: database/database_setup.sql
+SQL script: `database/database_setup.sql`
 
-The database was tested using basic INSERT, SELECT, UPDATE, and DELETE operations. Query results and screenshots are included in the Database Design Document.
+The database was tested with INSERT, SELECT, UPDATE, and DELETE operations. Results and screenshots are in the Database Design Document.
 
-3. JSON Data Modeling
+### Data Accuracy & Integrity
 
-JSON examples were created to demonstrate how the relational database entities can be serialized for API responses.
+Rules that keep the data accurate: primary keys, foreign keys, CHECK constraints, NOT NULL constraints, unique constraints, suitable data types, and indexed columns. Screenshots demonstrating them are in the Database Design Document.
 
-The examples include:
+## 2. JSON Data Modeling *(Week 2)*
+
+JSON examples show how relational entities can be serialized for API responses:
 
 - Users/Customers
 - Transactions
@@ -74,93 +83,136 @@ The examples include:
 - System Logs
 - A complete transaction object containing related user and category information
 
-JSON Examples: 
+The JSON documentation also explains how SQL tables and relationships map to the JSON structures. Examples are in `examples/`.
 
-The JSON documentation also explains how the SQL tables and their relationships map to the JSON structures.
+## 3. REST API *(Week 3)*
 
-4. Database Security and Accuracy
+Built to let clients (web and mobile apps) securely access the SMS data from `modified_sms_v2.xml`.
 
-The database includes rules designed to improve data accuracy and integrity, including:
+- **Data parsing:** the XML file is parsed in Python and converted into a list of JSON objects
+- **Server:** plain Python using `http.server`
+- **Security:** Basic Authentication, returning `401 Unauthorized` for invalid credentials
 
-- Primary keys
-- Foreign keys
-- CHECK constraints
-- NOT NULL constraints where required
-- Unique constraints where applicable
-- Appropriate data types
-- Indexed columns
+| Method | Endpoint             | Description                    |
+|--------|----------------------|--------------------------------|
+| GET    | `/transactions`      | List all SMS transactions      |
+| GET    | `/transactions/{id}` | View one transaction           |
+| POST   | `/transactions`      | Add a new transaction          |
+| PUT    | `/transactions/{id}` | Update an existing transaction |
+| DELETE | `/transactions/{id}` | Delete a transaction           |
 
-Screenshots demonstrating these rules are included in the Database Design Document.
+Full request/response examples and error codes: `docs/api_docs.md`
 
-5. Our Overall Team Work:
+**A note on security:** Basic Auth only Base64-encodes credentials (it does not encrypt them) and sends them with every request, so it is weak without HTTPS. Stronger alternatives are JWT and OAuth2, discussed in our PDF report.
 
-Our project continues the collaborative practices established in Week 1.
+### Data Structures & Algorithms
 
-The GitHub repository contains the ERD, SQL script, JSON examples, and project documentation. Team contributions are demonstrated through GitHub commits.
+We compare two ways to find a transaction by ID on 20+ records:
 
-The Scrum board has also been updated with completed Week 1 tasks and the new Week 2 sprint tasks.
+- **Linear search:** scans the list, O(n)
+- **Dictionary lookup:** maps `id → transaction`, O(1) on average
 
-Submissions Links
+Code is in `dsa/`. Results and reflection are in the PDF report.
 
-Team Participation Sheet
-Link: https://docs.google.com/spreadsheets/d/1gl_vX1CCEraUrOGmpLTPhHD2sr1nROxf8aGF37MW0eE/edit?gid=0#gid=0)
+### Testing
 
-ERD
-Link: https://lucid.app/lucidchart/2053b87c-b7ec-4ab9-826e-d79c89421447/edit?invitationId=inv_c4eeb7a2-aec9-481a-a07a-a7f2ef774123&page=0_0#
+The API is tested with curl/Postman. Screenshots (successful authenticated GET, unauthorized request, successful POST/PUT/DELETE) are in `screenshots/`.
 
-Architecture diagram
-Link: https://miro.com/app/board/uXjVHpCTTTc=/?share_link_id=949621607941
+## Setup & Running
 
-Scrum Board
-Link: https://github.com/users/gineza1-hash/projects/1/views/1
+**Requirements:** Python 3.8+
 
-Project Structure
+```bash
+# Clone the repo
+git clone <your-repo-url>
+cd <repo-folder>
 
-├── README.md  
-├── Docs/ 
-│   ├── Screenshots
-│   └── ERD_Diagram.png/ 
-├── database 
-│   └── database_setup.sql 
-├── examples  
-│   ├── category.json
-│   └── user.json 
+# Add the dataset
+# Place modified_sms_v2.xml in data/raw/
+
+# Configure environment (optional)
+cp .env.example .env
+
+# Start the API
+python api/server.py
+
+# Run the DSA comparison
+python dsa/search_comparison.py
+```
+
+Example request:
+
+```bash
+curl -u admin:password http://localhost:8000/transactions
+```
+
+## Repository Structure
+
+Week tags show when each part was added.
+
+```
+├── README.md
 ├── .gitignore
-├── Architecture diagram.jpg  
-├── .env.example                      
-├── requirements.txt                  
-├── index.html                        
-├── web/
-│   ├── styles.css                    
-│   ├── chart_handler.js              
-│   └── assets/                       
-├── data/
-│   ├── raw/                          
-│   │   └── momo.xml
-│   ├── processed/                    
-│   │   └── dashboard.json            
-│   ├── db.sqlite3                    
+├── .env.example
+├── requirements.txt
+├── Architecture diagram.jpg   # Week 1
+├── index.html                 # Week 1
+├── docs/
+│   ├── ERD_Diagram.png        # Week 2
+│   ├── api_docs.md            # Week 3
+│   └── Screenshots/           # Week 2
+├── screenshots/               # Week 3: API test screenshots
+├── database/                  # Week 2
+│   ├── indexes.sql
+│   └── database_setup.sql
+├── examples/                  # Week 2
+│   ├── category.json
+│   ├── complete_transaction.json
+│   ├── system_log.json
+│   ├── transaction.json
+│   ├── transaction_participant.json
+│   └── user.json
+├── data/                      # Week 1 (modified_sms_v2.xml added in Week 3)
+│   ├── raw/
+│   │   ├── momo.xml
+│   │   └── modified_sms_v2.xml
+│   ├── processed/
+│   │   └── dashboard.json
 │   └── logs/
-│       ├── etl.log                   
-│       └── dead_letter/              
-├── etl/
-│   ├── __init__.py
-│   ├── config.py                     
-│   ├── parse_xml.py                  
-│   ├── clean_normalize.py            
-│   ├── categorize.py                
-│   ├── load_db.py                   
-│   └── run.py                        
-├── api/                              
-│   ├── __init__.py
-│   ├── app.py                        
-│   ├── db.py                         
-│   └── schemas.py                    
-├── scripts/
-│   ├── run_etl.sh                   
-│   ├── export_json.sh                
-│   └── serve_frontend.sh             
-└── tests/
-    ├── test_parse_xml.py             
-    ├── test_clean_normalize.py
-    └── test_categorize.py 
+│       ├── etl.log
+│       └── dead_letter/
+├── etl/                       # Week 1
+│   ├── config.py
+│   ├── parse_xml.py
+│   ├── clean_normalize.py
+│   ├── categorize.py
+│   ├── load_db.py
+│   └── run.py
+├── api/                       # Week 3
+│   ├── server.py
+│   └── auth.py
+schemas.py
+├── dsa/                       # Week 3
+│   ├── parse_xml.py
+│   ├── modified_sms_v2.xml
+│   ├── transactions.json
+│   └── search_comparison.py
+├── web/                       # Week 1
+│   ├── styles.css
+│   ├── chart_handler.js
+│   └── assets/
+├── scripts/                   # Week 1
+│   ├── run_etl.sh
+│   ├── export_json.sh
+│   └── serve_frontend.sh
+```
+
+## Team Collaboration *(Week 1 onward)*
+
+We set up Scrum and the GitHub repo in Week 1 and have kept both going every week since. The GitHub repository holds the ERD, SQL script, JSON examples, API code, and documentation, and team contributions are tracked through GitHub commits. The Scrum board is updated each sprint with completed and new tasks.
+
+## Links
+
+- **ERD:** https://lucid.app/lucidchart/2053b87c-b7ec-4ab9-826e-d79c89421447/edit?invitationId=inv_c4eeb7a2-aec9-481a-a07a-a7f2ef774123&page=0_0#
+- **Architecture Diagram:** https://miro.com/app/board/uXjVHpCTTTc=/?share_link_id=949621607941
+- **Scrum Board:** https://github.com/users/gineza1-hash/projects/1/views/1
