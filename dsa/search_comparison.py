@@ -1,9 +1,8 @@
 import json
 import time
 import random
-from pathlib import Path
 
-def load_transactions(json_path=Path(__file__).parent.parent / "examples" / "transaction.json") -> list:
+def load_transactions(json_path="transactions.json") -> list:
     with open(json_path, "r", encoding="utf-8") as f:
         return json.load(f)
 
