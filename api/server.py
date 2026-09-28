@@ -5,7 +5,6 @@ from urllib.parse import urlparse
 from auth import check_auth, build_401_body
 
 # ---------------------------------------------------------------
-# In-memory data store, loaded from Person A's parsed JSON output.
 # Dict keyed by id -> O(1) average lookup, matching the DSA task.
 # ---------------------------------------------------------------
 TRANSACTIONS = {}
