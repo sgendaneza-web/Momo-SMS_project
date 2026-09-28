@@ -45,9 +45,9 @@ def classify(body: str) -> str:
     if body.lstrip().startswith("Yello!Umaze kugura"):
         return "bundle_purchase"
     if re.search(r"Y'ello,\s*A transaction of", body):
-        return "merchant_payment"          # e.g. *164*S*... by IREMBO Ltd
+        return "merchant_payment"          
     if "Your payment of" in body:
-        return "payment"                   # payment to a person / airtime / bundles
+        return "payment"                   
     if "transferred" in body:
         return "transfer"
     if "You have received" in body:
