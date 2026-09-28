@@ -1,4 +1,5 @@
 import json
+import os
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse
 
@@ -8,9 +9,10 @@ from auth import check_auth, build_401_body
 # Dict keyed by id -> O(1) average lookup, matching the DSA task.
 # ---------------------------------------------------------------
 TRANSACTIONS = {}
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))   # the folder server.py is in
+DATA_PATH = os.path.join(BASE_DIR, "..", "dsa", "transactions.json")
 
-
-def load_data(json_path="../dsa/transactions.json"):
+def load_data(json_path=DATA_PATH):
     global TRANSACTIONS
     with open(json_path, "r", encoding="utf-8") as f:
         records = json.load(f)
