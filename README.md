@@ -154,7 +154,6 @@ Week tags show when each part was added.
 ├── README.md
 ├── .gitignore
 ├── .env.example
-├── requirements.txt
 ├── Architecture diagram.jpg   # Week 1
 ├── index.html                 # Week 1
 ├── docs/
@@ -181,13 +180,6 @@ Week tags show when each part was added.
 │   └── logs/
 │       ├── etl.log
 │       └── dead_letter/
-├── etl/                       # Week 1
-│   ├── config.py
-│   ├── parse_xml.py
-│   ├── clean_normalize.py
-│   ├── categorize.py
-│   ├── load_db.py
-│   └── run.py
 ├── api/                       # Week 3
 │   ├── server.py
 │   └── auth.py
