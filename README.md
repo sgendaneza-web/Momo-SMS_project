@@ -216,4 +216,4 @@ We set up Scrum and the GitHub repo in Week 1 and have kept both going every wee
 - **ERD:** https://lucid.app/lucidchart/2053b87c-b7ec-4ab9-826e-d79c89421447/edit?invitationId=inv_c4eeb7a2-aec9-481a-a07a-a7f2ef774123&page=0_0#
 - **Architecture Diagram:** https://miro.com/app/board/uXjVHpCTTTc=/?share_link_id=949621607941
 - **Scrum Board:** https://github.com/users/gineza1-hash/projects/1/views/1
-- **Team task sheet:**https://docs.google.com/spreadsheets/d/1gl_vX1CCEraUrOGmpLTPhHD2sr1nROxf8aGF37MW0eE/edit?gid=0#gid=0
+- **Team task sheet:** https://docs.google.com/spreadsheets/d/1gl_vX1CCEraUrOGmpLTPhHD2sr1nROxf8aGF37MW0eE/edit?gid=0#gid=0
